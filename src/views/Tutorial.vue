@@ -70,7 +70,7 @@ const tutorials = ref([
               <div class="step-content">
                 <h3>{{ step.title }}</h3>
                 <p>{{ step.content }}</p>
-                <img :src="step.image" :alt="step.title" class="step-image">
+                <img loading="lazy" :src="step.image" :alt="step.title" class="step-image">
               </div>
             </div>
           </div>
@@ -245,4 +245,4 @@ const tutorials = ref([
     font-size: 1.25rem;
   }
 }
-</style> 
+</style>  

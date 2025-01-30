@@ -1110,7 +1110,7 @@ const selectedRelevance = ref('medium')
             </div>
             
             <div class="preview-area" v-else>
-              <img :src="imageUrl" alt="预览图片" />
+              <img :src="imageUrl" :alt="t('create.preview.imageAlt')" />
               <div class="preview-overlay">
                 <el-button 
                   type="primary" 
@@ -2329,4 +2329,4 @@ const selectedRelevance = ref('medium')
   color: var(--text-color-secondary);
   line-height: 1.5;
 }
-</style> 
+</style>   

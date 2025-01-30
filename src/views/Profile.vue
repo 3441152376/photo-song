@@ -539,7 +539,7 @@ onMounted(async () => {
               @click="handleWorkClick(work)"
             >
               <div class="work-image">
-                <img :src="work.imageUrl" :alt="work.title">
+                <img loading="lazy" :src="work.imageUrl" :alt="work.title">
                 <div class="work-overlay">
                   <div class="status-icon">
                     <el-icon v-if="work.status === 'completed'" class="play-icon"><CaretRight /></el-icon>
@@ -1225,4 +1225,4 @@ onMounted(async () => {
     max-width: 100%;
   }
 }
-</style> 
+</style>  

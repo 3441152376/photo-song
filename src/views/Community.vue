@@ -151,7 +151,7 @@ onMounted(() => {
           @click="handlePlay(work)"
         >
           <div class="work-image">
-            <img :src="work.imageUrl" :alt="work.title">
+            <img loading="lazy" :src="work.imageUrl" :alt="work.title">
             <div class="play-overlay">
               <div class="play-button">
                 <el-icon class="play-icon"><VideoPlay /></el-icon>
@@ -704,4 +704,4 @@ onMounted(() => {
     }
   }
 }
-</style> 
+</style>  

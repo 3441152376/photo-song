@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{{ $i18n.locale }}">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
     
     <!-- 基础 Meta -->
     <title>Photo Song - Turn Photos into Music | AI Photo Music Generator</title>
@@ -13,17 +17,20 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="google" content="notranslate">
-    <link rel="canonical" href="https://photosong.com">
+    <link rel="canonical" href="https://photosong.com" data-vue-router-controlled>
+    <link rel="canonical" hreflang="en" href="https://photosong.com/en" data-vue-router-controlled>
+    <link rel="canonical" hreflang="zh-CN" href="https://photosong.com/zh" data-vue-router-controlled>
+    <link rel="canonical" hreflang="ru" href="https://photosong.com/ru" data-vue-router-controlled>
     
     <!-- Language-specific meta descriptions -->
     <meta name="description" lang="en" content="Transform your photos into unique musical pieces with Photo Song. Our AI-powered platform converts images to music, creating personalized songs from your pictures. Experience the magic of photo to music conversion with our advanced AI technology.">
-    <meta name="description" lang="zh-CN" content="Photo Song - AI 驱动的照片音乐创作平台，让每张照片都能唱出专属的歌。使用先进的 AI 技术，将图片转换为独特的音乐作品。">
-    <meta name="description" lang="ru" content="Photo Song - Создавайте уникальные музыкальные произведения из ваших фотографий с помощью передовых технологий ИИ.">
+    <meta name="description" lang="zh-CN" content="Photo Song - AI 驱动的照片音乐创作平台，让每张照片都能唱出专属的歌。使用先进的 AI 技术，将图片转换为独特的音乐作品。立即体验照片到音乐的魔力转换。">
+    <meta name="description" lang="ru" content="Photo Song - Создавайте уникальные музыкальные произведения из ваших фотографий с помощью передовых технологий ИИ. Превратите любое изображение в персонализированную песню с помощью нашей платформы. Испытайте магию преобразования фотографий в музыку.">
     
-    <!-- 多语言支持 -->
-    <link rel="alternate" hreflang="zh-CN" href="https://photosong.com">
-    <link rel="alternate" hreflang="en-US" href="https://photosong.com/">
-    <link rel="alternate" hreflang="ru-RU" href="https://photosong.com/">
+    <!-- Language Alternates -->
+    <link rel="alternate" hreflang="zh-CN" href="https://photosong.com/zh">
+    <link rel="alternate" hreflang="en-US" href="https://photosong.com/en">
+    <link rel="alternate" hreflang="ru-RU" href="https://photosong.com/ru">
     <link rel="alternate" hreflang="x-default" href="https://photosong.com">
     
     <!-- Open Graph -->
@@ -31,6 +38,7 @@
     <meta property="og:title" content="Photo Song - Turn Photos into Music | AI Photo Music Generator">
     <meta property="og:description" content="Transform your photos into unique musical pieces with our AI photo music generator. Convert any image into a personalized song using advanced AI technology. Try our photo to music converter today!">
     <meta property="og:image" content="https://photosong.com/og-image-en.jpg">
+    <meta property="og:image:alt" content="Photo Song - AI Photo Music Generator Interface">
     <meta property="og:url" content="https://photosong.com">
     <meta property="og:site_name" content="Photo Song - Photo Music Generator">
     <meta property="og:locale" content="en_US">
@@ -43,8 +51,8 @@
     <meta property="og:title:ru" content="Photo Song - Создание Музыки из Фотографий с Помощью ИИ">
     
     <meta property="og:description:en" content="Transform your photos into unique musical pieces with our AI photo music generator. Convert any image into a personalized song using advanced AI technology. Try our photo to music converter today!">
-    <meta property="og:description:zh" content="使用 AI 技术将您的照片转换为独特的音乐作品。我们的高级 AI 音乐生成平台可以将任何图片转化为个性化的歌曲。">
-    <meta property="og:description:ru" content="Создавайте уникальные музыкальные произведения из ваших фотографий с помощью технологии ИИ. Превратите любое изображение в персонализированную песню.">
+    <meta property="og:description:zh" content="使用 AI 技术将您的照片转换为独特的音乐作品。我们的高级 AI 音乐生成平台可以将任何图片转化为个性化的歌曲。立即开始您的音乐创作之旅。">
+    <meta property="og:description:ru" content="Создавайте уникальные музыкальные произведения из ваших фотографий с помощью технологии ИИ. Превратите любое изображение в персонализированную песню. Начните свое музыкальное путешествие сегодня.">
     
     <meta property="og:image:en" content="https://photosong.com/og-image-en.jpg">
     <meta property="og:image:zh" content="https://photosong.com/og-image-zh.jpg">
@@ -55,6 +63,7 @@
     <meta name="twitter:title" content="Photo Song - Turn Photos into Music | AI Photo Music Generator">
     <meta name="twitter:description" content="Transform your photos into unique musical pieces with our AI photo music generator. Convert any image into a personalized song using advanced AI technology.">
     <meta name="twitter:image" content="https://photosong.com/og-image-en.jpg">
+    <meta name="twitter:image:alt" content="Photo Song - AI Photo Music Generator Interface">
     <meta name="twitter:creator" content="@PhotoSong">
     <meta name="twitter:site" content="@PhotoSong">
     
@@ -64,8 +73,8 @@
     <meta name="twitter:title:ru" content="Photo Song - Создание Музыки из Фотографий с Помощью ИИ">
     
     <meta name="twitter:description:en" content="Transform your photos into unique musical pieces with our AI photo music generator. Convert any image into a personalized song using advanced AI technology.">
-    <meta name="twitter:description:zh" content="使用 AI 技术将您的照片转换为独特的音乐作品。我们的高级 AI 音乐生成平台可以将任何图片转化为个性化的歌曲。">
-    <meta name="twitter:description:ru" content="Создавайте уникальные музыкальные произведения из ваших фотографий с помощью технологии ИИ. Превратите любое изображение в персонализированную песню.">
+    <meta name="twitter:description:zh" content="使用 AI 技术将您的照片转换为独特的音乐作品。我们的高级 AI 音乐生成平台可以将任何图片转化为个性化的歌曲。立即开始您的音乐创作之旅。">
+    <meta name="twitter:description:ru" content="Создавайте уникальные музыкальные произведения из ваших фотографий с помощью технологии ИИ. Превратите любое изображение в персонализированную песню. Начните свое музыкальное путешествие сегодня.">
     
     <meta name="twitter:image:en" content="https://photosong.com/og-image-en.jpg">
     <meta name="twitter:image:zh" content="https://photosong.com/og-image-zh.jpg">
@@ -78,7 +87,14 @@
     <meta name="theme-color" content="#0F172A">
     <meta name="format-detection" content="telephone=no">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Photo Song">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-TileColor" content="#0F172A">
+    <meta name="msapplication-tap-highlight" content="no">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/apple-touch-icon-167x167.png">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
@@ -98,6 +114,24 @@
     
     <!-- 预加载关键资源 -->
     <link rel="modulepreload" href="/src/main.js">
+    <link rel="preload" href="/src/assets/logo.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/src/assets/hero-bg.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="/src/assets/styles/critical.css" as="style">
+    <link rel="preload" href="/src/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/src/i18n/index.js" as="script">
+    
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://api.photosong.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta http-equiv="Cache-Control" content="max-age=86400, must-revalidate">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="dns-prefetch" href="//api.photosong.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <meta name="renderer" content="webkit">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     
     <!-- PWA 支持 -->
     <link rel="manifest" href="/manifest.json">
@@ -196,6 +230,66 @@
       }
     </script>
     
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Photo Song",
+        "url": "https://photosong.com",
+        "logo": "https://photosong.com/icons/apple-touch-icon-180x180.png",
+        "sameAs": [
+          "https://musescore.com/groups/photo-song",
+          "https://soundcloud.com/photo-song-official",
+          "https://bandcamp.com/photo-song",
+          "https://splice.com/sounds/photo-song"
+        ]
+      }
+    </script>
+    
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Photo Song",
+        "url": "https://photosong.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://photosong.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://photosong.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tutorial",
+            "item": "https://photosong.com/tutorial"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Community",
+            "item": "https://photosong.com/community"
+          }
+        ]
+      }
+    </script>
+    
     <!-- 音乐应用结构化数据 -->
     <script type="application/ld+json">
       {
@@ -243,7 +337,15 @@
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <noscript>
-      <strong>很抱歉，Photo Song 需要启用 JavaScript 才能运行。请启用后重试。</strong>
+      <div lang="zh-CN">
+        <strong>很抱歉，Photo Song 需要启用 JavaScript 才能运行。请启用后重试。</strong>
+      </div>
+      <div lang="en">
+        <strong>Sorry, Photo Song requires JavaScript to run. Please enable it and try again.</strong>
+      </div>
+      <div lang="ru">
+        <strong>Извините, для работы Photo Song требуется JavaScript. Пожалуйста, включите его и попробуйте снова.</strong>
+      </div>
     </noscript>
   </body>
 </html>
