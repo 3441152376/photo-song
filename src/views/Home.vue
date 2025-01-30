@@ -536,10 +536,11 @@ const communityPosts = ref([
         >
           <div class="work-media">
             <img 
+              loading="lazy"
               :src="work.imageUrl" 
               :alt="work.title || t('workDetail.untitledWork')"
               class="work-image"
-              loading="lazy"
+              decoding="async"
             >
             <div class="work-overlay">
               <div class="work-status" v-if="work.status !== 'completed'" aria-live="polite">
@@ -2041,4 +2042,4 @@ const communityPosts = ref([
     font-weight: 500;
   }
 }
-</style> 
+</style>    

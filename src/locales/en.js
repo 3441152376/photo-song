@@ -358,7 +358,8 @@ export default {
       description: 'Preview your work',
       loading: 'Loading...',
       error: 'Failed to load',
-      retry: 'Retry'
+      retry: 'Retry',
+      imageAlt: 'Preview image'
     },
     errors: {
       incomplete: 'Please fill in all required information',
@@ -1220,4 +1221,4 @@ export default {
       terms: 'Terms of Service'
     }
   }
-} 
+}  

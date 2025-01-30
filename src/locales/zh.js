@@ -374,7 +374,8 @@ export default {
       description: '预览您的作品',
       loading: '加载中...',
       error: '加载失败',
-      retry: '重试'
+      retry: '重试',
+      imageAlt: '预览图片'
     },
     share: {
       title: '分享',
@@ -1213,4 +1214,4 @@ export default {
       terms: '用户协议'
     }
   }
-} 
+}  
