@@ -554,6 +554,8 @@ export default {
     }
   },
   workDetail: {
+    untitledWork: 'Untitled Work',
+    anonymousUser: 'Anonymous User',
     error: {
       notFound: 'Work not found',
       loadFailed: 'Failed to load work details',
@@ -1221,4 +1223,4 @@ export default {
       terms: 'Terms of Service'
     }
   }
-}  
+}      

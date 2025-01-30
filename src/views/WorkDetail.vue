@@ -17,6 +17,19 @@ const loading = ref(false)
 const error = ref(null)
 const work = ref(null)
 const checkInterval = ref(null)
+
+// Computed properties for localized content
+const localizedTitle = computed(() => 
+  work.value?.localizedTitles?.[locale.value] || 
+  work.value?.title || 
+  t('workDetail.untitledWork')
+)
+
+const localizedDescription = computed(() => 
+  work.value?.localizedDescriptions?.[locale.value] || 
+  work.value?.description || 
+  t('workDetail.defaultDescription')
+)
 const currentLyric = ref('')
 const showLyrics = ref(true)
 const imageLoaded = ref(false)
@@ -811,7 +824,7 @@ onUnmounted(() => {
           <!-- 作品信息区域 -->
           <div class="work-info">
             <div class="info-header">
-              <h1 class="work-title gradient-text">{{ work?.title }}</h1>
+              <h1 class="work-title gradient-text">{{ localizedTitle }}</h1>
               <div class="author-section">
                 <div class="author-card">
                   <div class="author-main">
@@ -860,9 +873,9 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <div class="info-section" v-if="work?.description">
+              <div class="info-section" v-if="localizedDescription">
                 <h3 class="section-title">{{ t('workDetail.description.title') }}</h3>
-                <p class="description-text">{{ work.description }}</p>
+                <p class="description-text">{{ localizedDescription }}</p>
               </div>
 
               <div class="info-section" v-if="work?.lyrics">
@@ -1572,4 +1585,4 @@ onUnmounted(() => {
     transform: translateX(100%);
   }
 }
-</style> 
+</style>    

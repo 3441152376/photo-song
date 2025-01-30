@@ -348,8 +348,26 @@ router.beforeEach(async (to, from, next) => {
 })
 
 // 全局后置钩子
-router.afterEach((to, from) => {
-  // 这里可以添加页面访问统计等逻辑
+router.afterEach(async (to, from) => {
+  // 自动更新作品站点地图
+  if (to.name === 'WorkDetail' && to.params.id) {
+    try {
+      const query = new AV.Query('_File')
+      query.equalTo('name', 'works-sitemap.xml')
+      query.descending('createdAt')
+      const lastUpdate = await query.first()
+      
+      if (!lastUpdate || 
+          (new Date() - lastUpdate.createdAt) > 3600000) { // Update if older than 1 hour
+        const worksSitemap = await generateWorksSitemap()
+        const worksSitemapFile = new AV.File('works-sitemap.xml', { base64: btoa(worksSitemap) })
+        await worksSitemapFile.save()
+        console.log('Works sitemap updated successfully')
+      }
+    } catch (error) {
+      console.error('Error updating works sitemap:', error)
+    }
+  }
 })
 
-export default router  
+export default router    

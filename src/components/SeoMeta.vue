@@ -207,15 +207,75 @@ const updateMeta = () => {
   // 多语言 SEO
   const alternateLinks = getAlternateLinks()
   document.querySelectorAll('link[rel="alternate"]').forEach(el => el.remove())
-  alternateLinks.forEach(({ lang, url }) => {
-    if (lang !== locale.value) {
-      const link = document.createElement('link')
-      link.rel = 'alternate'
-      link.hreflang = lang
-      link.href = url
-      document.head.appendChild(link)
-    }
+  
+  // Add x-default hreflang
+  const xDefaultLink = document.createElement('link')
+  xDefaultLink.rel = 'alternate'
+  xDefaultLink.hreflang = 'x-default'
+  xDefaultLink.href = `https://photosong.com${route.path}`
+  document.head.appendChild(xDefaultLink)
+  
+  // Handle work detail pages specially
+  if (route.name === 'WorkDetail' && route.params.id) {
+    const workId = route.params.id
+    const languages = ['zh-CN', 'en-US', 'ru-RU']
+    languages.forEach(lang => {
+      if (lang !== locale.value) {
+        const link = document.createElement('link')
+        link.rel = 'alternate'
+        link.hreflang = lang.toLowerCase()
+        link.href = `https://photosong.com/${lang.split('-')[0]}/work/${workId}`
+        document.head.appendChild(link)
+      }
+    })
+  } else {
+    // Handle other pages
+    alternateLinks.forEach(({ lang, url }) => {
+      if (lang !== locale.value) {
+        const link = document.createElement('link')
+        link.rel = 'alternate'
+        link.hreflang = lang
+        link.href = url
+        document.head.appendChild(link)
+      }
+    })
+  }
+
+  // Watch for language changes to update structured data
+  watch(() => locale.value, () => {
+    updateStructuredData()
   })
+
+  // Function to update structured data
+  const updateStructuredData = () => {
+    if (route.name !== 'WorkDetail' || !route.params.id) return
+
+    const workStructuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      'name': currentMeta.value.title,
+      'description': currentMeta.value.description,
+      'inLanguage': locale.value,
+      'datePublished': work.value?.createdAt,
+      'author': {
+        '@type': 'Person',
+        'name': work.value?.author?.name || t('workDetail.anonymousUser')
+      }
+    }
+    
+    const scriptElement = document.querySelector('script[type="application/ld+json"]')
+    if (scriptElement) {
+      scriptElement.textContent = JSON.stringify(workStructuredData)
+    } else {
+      const newScript = document.createElement('script')
+      newScript.type = 'application/ld+json'
+      newScript.textContent = JSON.stringify(workStructuredData)
+      document.head.appendChild(newScript)
+    }
+  }
+
+  // Initial update of structured data
+  updateStructuredData()
 
   // Open Graph
   document.querySelector('meta[property="og:title"]').setAttribute('content', currentMeta.value.title)
@@ -311,4 +371,4 @@ watch([() => route.path, locale], () => {
 
 <template>
   <!-- 组件不需要渲染任何内容 -->
-</template> 
+</template>      

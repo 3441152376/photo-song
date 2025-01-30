@@ -10,6 +10,7 @@ export const generateWorksSitemap = async () => {
     const query = new AV.Query('Work')
     query.equalTo('isPublic', true)
     query.descending('updatedAt')
+    query.include('creator') // Include creator information for better indexing
     query.limit(1000) // 限制最多 1000 个作品
     
     const works = await query.find()
@@ -30,6 +31,9 @@ export const generateWorksSitemap = async () => {
       sitemap += '    <changefreq>weekly</changefreq>\n'
       sitemap += '    <priority>0.8</priority>\n'
       
+      // Add x-default hreflang
+      sitemap += `    <xhtml:link rel="alternate" hreflang="x-default" href="https://photosong.com/work/${workData.objectId}"/>\n`
+      
       // 添加多语言支持
       sitemap += '    <xhtml:link rel="alternate" hreflang="en" '
       sitemap += `href="https://photosong.com/en/work/${workData.objectId}"/>\n`
@@ -40,9 +44,16 @@ export const generateWorksSitemap = async () => {
       
       // 添加图片信息
       if (workData.imageUrl) {
+        const localizedTitles = workData.localizedTitles || {}
+        const titles = {
+          en: localizedTitles.en || workData.title || 'Photo Music Creation',
+          zh: localizedTitles.zh || workData.title || '照片音乐创作',
+          ru: localizedTitles.ru || workData.title || 'Музыкальное творение из фото'
+        }
+        
         sitemap += '    <image:image>\n'
         sitemap += `      <image:loc>${workData.imageUrl}</image:loc>\n`
-        sitemap += `      <image:title>${workData.title || 'Photo Music Creation'}</image:title>\n`
+        sitemap += `      <image:title>${titles[workData.language] || titles.en}</image:title>\n`
         sitemap += '      <image:caption>AI generated music from photo</image:caption>\n'
         sitemap += `      <image:geo_location>${workData.location || 'Global'}</image:geo_location>\n`
         sitemap += '      <image:license>https://photosong.com/license</image:license>\n'
@@ -53,7 +64,7 @@ export const generateWorksSitemap = async () => {
       if (workData.previewVideoUrl) {
         sitemap += '    <video:video>\n'
         sitemap += `      <video:thumbnail_loc>${workData.imageUrl}</video:thumbnail_loc>\n`
-        sitemap += `      <video:title>${workData.title || 'Photo Music Creation'}</video:title>\n`
+        sitemap += `      <video:title>${titles[workData.language] || titles.en}</video:title>\n`
         sitemap += '      <video:description>AI generated music visualization from photo</video:description>\n'
         sitemap += '      <video:content_loc>' + workData.previewVideoUrl + '</video:content_loc>\n'
         sitemap += '      <video:player_loc>' + 
@@ -279,4 +290,4 @@ export const generateMainSitemap = () => {
   
   sitemap += '</urlset>'
   return sitemap
-} 
+}    

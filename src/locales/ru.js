@@ -529,6 +529,8 @@ export default {
     }
   },
   workDetail: {
+    untitledWork: 'Без названия',
+    anonymousUser: 'Анонимный пользователь',
     error: {
       notFound: 'Работа не найдена',
       loadFailed: 'Не удалось загрузить детали работы',
@@ -1297,4 +1299,4 @@ export default {
       terms: 'Условия использования'
     }
   }
-} 
+}   

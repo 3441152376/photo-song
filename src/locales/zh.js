@@ -461,6 +461,8 @@ export default {
     }
   },
   workDetail: {
+    untitledWork: '未命名作品',
+    anonymousUser: '匿名用户',
     error: {
       notFound: '作品不存在',
       loadFailed: '加载作品详情失败',
@@ -1214,4 +1216,4 @@ export default {
       terms: '用户协议'
     }
   }
-}  
+}      
